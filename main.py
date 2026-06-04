@@ -7,6 +7,11 @@ import pika
 
 app = FastAPI(title="Dharwad Local Eats - Enterprise Edition")
 
+# --- THE KUBERNETES HEARTBEAT ---
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
 # --- MOCK DATA ---
 MENU = [
     {"id": 1, "item": "Benne Masala Dosa", "price": 80},
