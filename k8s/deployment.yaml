@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dharwad-eats-api-deployment
+  labels:
+    app: dharwad-eats-api
+spec:
+  replicas: 2 # Runs two copies across your cluster for high availability
+  selector:
+    matchLabels:
+      app: dharwad-eats-api
+  template:
+    metadata:
+      labels:
+        app: dharwad-eats-api
+    spec:
+      containers:
+      - name: api-container
+        image: kubesanjay930/dharwad-eats-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        # The Liveness Probe tells K8s if the container crashed or froze
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        # The Readiness Probe tells K8s when the container is ready to accept user orders
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10

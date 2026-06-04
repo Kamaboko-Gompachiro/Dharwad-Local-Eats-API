@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dharwad-eats-api-service
+spec:
+  type: ClusterIP # Keeps traffic secure inside the cluster
+  selector:
+    app: dharwad-eats-api
+  ports:
+  - protocol: TCP
+    port: 80       # The port other services use to call this API
+    targetPort: 8000 # The port our Python container is listening on
