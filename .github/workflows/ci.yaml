@@ -26,7 +26,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/dharwad-eats-api:latest .
 
       # Step 4: Enterprise Security Scan (Trivy)
-      # This shows recruiters you care about DevSecOps. It scans the container for vulnerabilities.
+      
       - name: Run Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@master
         with:
